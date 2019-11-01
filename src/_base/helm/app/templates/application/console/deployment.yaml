@@ -18,11 +18,11 @@ spec:
       - env:
         {{- range $key, $value := index .Values.docker.services "php-base" "environment" }}
         - name: {{ $key | quote }}
-          value: {{ $value | quote }}
+          value: {{ tpl $value . | quote }}
         {{- end }}
         {{- range $key, $value := .Values.docker.services.console.environment }}
         - name: {{ $key | quote }}
-          value: {{ $value | quote }}
+          value: {{ tpl $value . | quote }}
         {{- end }}
         {{- range $key, $value := .Values.environment }}
         - name: {{ $key | quote }}
